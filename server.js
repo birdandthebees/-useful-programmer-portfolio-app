@@ -15,9 +15,17 @@ mongoose.connect(process.env.DB_URI, {
 
 // enable CORS (https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
 // so that your API is remotely testable by FCC
-var cors = require("cors");
-const { request } = require("express");
-app.use(cors({ optionsSuccessStatus: 200 })); // some legacy browsers choke on 204
+const cors = require("cors");
+const corsOptions = {
+  origin: "*",
+  credentials: true, //access-control-allow-credentials:true
+  optionSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
+// var cors = require("cors");
+// const { request } = require("express");
+// app.use(cors({ optionsSuccessStatus: 200 })); // some legacy browsers choke on 204
 
 // http://expressjs.com/en/starter/static-files.html
 app.use(express.static("public"));
