@@ -1,13 +1,10 @@
-const dotenv = require("dotenv");
-dotenv.config();
-
 var express = require("express");
 var mongo = require("mongodb");
 var mongoose = require("mongoose");
 var bodyParser = require("body-parser");
 var shortid = require("shortid");
 var dns = require("dns");
-var database_uri = require("dotenv").config();
+require("dotenv").config();
 
 var app = express();
 var port = process.env.PORT || 3000;
@@ -186,6 +183,11 @@ app.post("/api/users", (req, res) => {
       username: exerciseUser.username,
       _id: exerciseUser["_id"],
     });
+  });
+});
+app.get("/api/exercise/users", (req, res) => {
+  ExerciseUser.find({}, (err, exerciseUsers) => {
+    res.json(exerciseUsers);
   });
 });
 
